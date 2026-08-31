@@ -1,0 +1,72 @@
+{
+  "batch_name": "mt3_shape_pose_batch_example",
+  "shared_trial_root": "/mnt/hgfs2/tmp_vision/mt3_batch",
+  "results_note": "Example batch for MT3 data collection. Edit poses/trials before running.",
+  "default_model_name": "green_rectangular_prism",
+  "default_sdf_path": "/home/wei/ros_ws/src/sawyer_gazebo/worlds/green_rectangular_prism.sdf",
+  "default_query": "pick up the green rectangular prism",
+  "default_prompt": "green rectangular prism",
+  "default_use_pointcloud_pose": true,
+  "default_use_demo_replay": true,
+  "default_use_icp_object_pose": true,
+  "default_auto_record_success": true,
+  "default_reset_arm": true,
+  "default_timeout_sec": 180,
+  "cleanup_model_names": [
+    "grasp_object",
+    "green_cylinder",
+    "green_rectangular_prism",
+    "green_sphere",
+    "simple_shoe"
+  ],
+  "trials": [
+    {
+      "id": "cuboid_center_yaw0",
+      "enabled": true,
+      "model_name": "green_rectangular_prism",
+      "sdf_path": "/home/wei/ros_ws/src/sawyer_gazebo/worlds/green_rectangular_prism.sdf",
+      "object_shape": "rectangular_prism",
+      "object_label": "green_rectangular_prism",
+      "query": "pick up the green rectangular prism",
+      "prompt": "green rectangular prism",
+      "pose": {
+        "x": 0.60,
+        "y": 0.00,
+        "z": 0.35,
+        "yaw_deg": 0
+      }
+    },
+    {
+      "id": "cuboid_right_yaw0",
+      "enabled": true,
+      "model_name": "green_rectangular_prism",
+      "sdf_path": "/home/wei/ros_ws/src/sawyer_gazebo/worlds/green_rectangular_prism.sdf",
+      "object_shape": "rectangular_prism",
+      "object_label": "green_rectangular_prism",
+      "query": "pick up the green rectangular prism",
+      "prompt": "green rectangular prism",
+      "pose": {
+        "x": 0.70,
+        "y": 0.10,
+        "z": 0.35,
+        "yaw_deg": 0
+      }
+    },
+    {
+      "id": "cuboid_center_yaw30",
+      "enabled": false,
+      "model_name": "green_rectangular_prism",
+      "sdf_path": "/home/wei/ros_ws/src/sawyer_gazebo/worlds/green_rectangular_prism.sdf",
+      "object_shape": "rectangular_prism",
+      "object_label": "green_rectangular_prism_yaw30",
+      "query": "pick up the green rectangular prism",
+      "prompt": "green rectangular prism",
+      "pose": {
+        "x": 0.60,
+        "y": 0.00,
+        "z": 0.35,
+        "yaw_deg": 30
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+# Real Sawyer MT3 grasp parameters.
+# These values are starting placeholders. Tune them on the real table before
+# enabling autonomous grasp execution.
+
+sawyer_auto_grasp:
+  # Execution mode marker used by launch/scripts for logging and sanity checks.
+  execution_environment: real
+
+  # Workspace bounds in Sawyer base frame: [min_x, min_y, min_z, max_x, max_y, max_z].
+  # TODO: measure the reachable and collision-free real workspace.
+  workspace: [0.10, -0.45, -0.20, 1.00, 0.45, 0.60]
+
+  # Safe joint seed before grasp planning.
+  # TODO: verify this pose is collision-free for your real table and camera setup.
+  safe_joints:
+    right_j0: 0.0
+    right_j1: -0.8
+    right_j2: 0.0
+    right_j3: 1.8
+    right_j4: 0.0
+    right_j5: 0.0
+    right_j6: 0.0
+
+  # Real table/object height placeholders in base frame.
+  # TODO: replace with measured table top and object center/top estimates.
+  table_surface_z: 0.00
+  object_base_z: 0.00
+  top_grasp_clearance: 0.030
+  pregrasp_clearance: 0.040
+  final_descent_step: 0.003
+
+  # TCP/flange offsets. Existing code commands right_hand by default.
+  # TODO: measure from right_hand flange to actual fingertip/contact point.
+  flange_grasp_z_offset: 0.040
+  side_flange_grasp_z_offset: 0.000
+  tcp_x_offset: 0.000
+  tcp_y_offset: 0.000
+  side_tcp_forward_offset: 0.000
+
+  # Gripper behavior.
+  # TODO: tune for the installed electric gripper fingers and object widths.
+  gripper_name: right_gripper
+  gripper_opening: 0.070
+  gripper_cmd_velocity: 0.030
+  left_finger_tip_frame: right_gripper_l_finger_tip
+  right_finger_tip_frame: right_gripper_r_finger_tip
+
+  # Motion speed limits for first real tests.
+  normal_velocity_scale: 0.10
+  normal_acceleration_scale: 0.10
+  descent_velocity_scale: 0.05
+  descent_acceleration_scale: 0.05
+
+  # ASC60C / HP60C registered RGB-D camera.
+  rgb_topic: /ascamera_hp60c/rgb0/image
+  depth_topic: /ascamera_hp60c/depth0/image_raw
+  camera_info_topic: /ascamera_hp60c/rgb0/camera_info
+  # Diagnostic only in real mode; do not mask-index this sparse/unorganized cloud.
+  pointcloud_topic: /ascamera_hp60c/depth0/points
+
+  # External LangSAM masks shared from Windows.
+  langsam_mask_path: /mnt/hgfs2/tmp_vision/current_mask.npy
+  target_mask_path: /mnt/hgfs2/tmp_vision/current_mask.npy
+  anchor_mask_path: /mnt/hgfs2/tmp_vision/current_anchor_mask.npy
+
+  # Real perception path: registered depth + CameraInfo, not PointCloud2 indexing.
+  use_registered_depth_mask: true
+  use_pointcloud_pose: false
+  subscribe_pointcloud_diagnostic: false
+  perception_min_points: 20
+  perception_max_points: 12000
+
+  # Eye-to-hand calibrated ASC60C frame.
+  # Publish base <- ascamera_hp60c_color_0 only after accepting ChArUco calibration.
+  target_frame: base
+  camera_frame: ascamera_hp60c_color_0
+  strict_camera_frame: true
+  use_tf_camera_extrinsics: true
+  allow_hardcoded_camera_fallback: false
+
+  # Real-pipeline safety / replay defaults.
+  # Keep true until real executors, workspace, table z and TCP offsets are verified.
+  dry_run: true
+  allow_real_execution: false
+  use_perception: true
+  require_depth_pose: true
+  use_demo_replay: true
+  prefer_pose_replay: true
+  auto_record_success: false
+
+  # Real postcheck currently has no Gazebo ground truth.
+  # executor_only: keep executor result but record postcheck as unknown.
+  # manual_param: additionally set manual_success_label true/false.
+  real_postcheck_mode: executor_only
+  manual_success_label: ""
+
+  # These are intentionally separate from the simulation executors.
+  grasp_executor_path: ~/ros_ws/src/sawyer_gazebo/scripts/mt3_sawyer_grasp_real.py
+  place_executor_path: ~/ros_ws/src/sawyer_gazebo/scripts/mt3_sawyer_place_real.py
+
+  # Real perception safety z-range; currently follows the placeholder workspace.
+  # TODO: replace after measuring the actual table/object workspace in base frame.
+  object_z_min: -0.20
+  object_z_max: 0.60

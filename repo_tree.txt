@@ -1,0 +1,199 @@
+D:\ubuntu20
+|-- code
+|   `-- learning_thousand_tasks
+|       |-- repo_tree.txt
+|       |-- PROJECT_CODE_AUDIT.md
+|       |-- REAL_ROBOT_FILES_OVERVIEW_20260822.md
+|       |-- MT3_REAL_ROBOT_PROGRESS_20260817.md
+|       |-- REAL_ROBOT_SETUP.md
+|       |-- CODEX_HANDOFF_REAL_ASC60C_20260811.md
+|       |-- CODEX_HANDOFF_REAL_ROBOT_CURRENT_20260819.md
+|       |-- setup.sh
+|       |
+|       |-- Current real top-grasp executor
+|       |   `-- mt3_sawyer_real_grasp.py
+|       |
+|       |-- Core MT3 / simulation code
+|       |   |-- mt3_generalize.py
+|       |   |-- mt3_pipeline.py
+|       |   |-- mt3_pipeline_top_lift.py
+|       |   |-- mt3_generalize_top_lift.py
+|       |   |-- mt3_cylinder_insert_pipeline.py
+|       |   |-- mt3_anchor_place_pipeline.py
+|       |   |-- mt3_demo_library.py
+|       |   |-- mt3_scene_package.py
+|       |   |-- mt3_relation_scene_package.py
+|       |   |-- mt3_alignment.py
+|       |   |-- mt3_icp_registration.py
+|       |   |-- mt3_perception.py
+|       |   |-- mt3_anchor_perception.py
+|       |   |-- mt3_visualization.py
+|       |   |-- mt3_place_generalization.py
+|       |   |-- mt3_anchor_place_generalization.py
+|       |   |-- mt3_cylinder_insert_generalization.py
+|       |   |-- mt3_batch_runner.py
+|       |   |-- llm_retriever.py
+|       |   `-- mt3_llm_env.example
+|       |
+|       |-- Demo recording / dataset utilities
+|       |   |-- record_demo.py
+|       |   |-- record_place_demo.py
+|       |   |-- record_anchor_place_demo.py
+|       |   |-- record_cylinder_insert_demo.py
+|       |   |-- record_cuboid_yaw_demo.py
+|       |   |-- record_side_grasp_demo.py
+|       |   |-- record_tall_body_grasp_demo.py
+|       |   |-- backfill_auto_recorded_metadata.py
+|       |   |-- clean_demo_library_three_demos.py
+|       |   |-- promote_rollout_to_auto_success.py
+|       |   |-- mark_insert_trial.py
+|       |   |-- check_insert_masks.py
+|       |   |-- analyze_perception_bias.py
+|       |   `-- analyze_relation_ablation.py
+|       |
+|       |-- Demo library / experiment outputs
+|       |   `-- demo_library
+|       |       |-- recorded
+|       |       |   `-- legacy/current simulation recorded demos
+|       |       |       |-- cube_top_grasp*.json
+|       |       |       |-- cube_pick_place_left.json
+|       |       |       |-- cuboid_top_yaw_grasp.json
+|       |       |       `-- tall_cylinder_side_grasp.json
+|       |       |-- simulation
+|       |       |   |-- recorded
+|       |       |   `-- auto_recorded
+|       |       |-- real
+|       |       |   |-- recorded        (target layout for real demos; may not exist in Windows mirror)
+|       |       |   `-- auto_recorded
+|       |       |-- scene_packages
+|       |       |-- rollout_trajectories
+|       |       `-- experiment_logs
+|       |           |-- top_grasp
+|       |           |-- rotated_top_grasp
+|       |           |-- anchor_place
+|       |           |-- directional_place
+|       |           `-- vertical_insert
+|       |
+|       |-- Real robot kinesthetic demo patch
+|       |   `-- real_kinesthetic_demo_patch
+|       |       |-- REAL_KINESTHETIC_DEMO_README.md
+|       |       |-- real_kinesthetic_recorder.py
+|       |       |-- record_demo_real.py
+|       |       |-- record_anchor_place_demo_real.py
+|       |       |-- record_cylinder_insert_demo_real.py
+|       |       `-- record_cuboid_yaw_demo_real.py
+|       |
+|       |-- Real RGB-D perception patch
+|       |   `-- real_perception_patch
+|       |       |-- REAL_PERCEPTION_PATCH_README.md
+|       |       |-- mt3_perception_real.py
+|       |       |-- mt3_anchor_perception_real.py
+|       |       |-- mt3_alignment_real.py
+|       |       |-- mt3_real_object_param_bridge.py
+|       |       `-- mt3_real_params_updated.yaml
+|       |
+|       |-- Real execution pipeline patch
+|       |   `-- real_pipeline_patch
+|       |       |-- REAL_PIPELINE_PATCH_README.md
+|       |       |-- REAL_DEMO_READY_README.txt
+|       |       |-- mt3_pipeline_real.py
+|       |       |-- mt3_cylinder_insert_pipeline_real.py
+|       |       |-- check_real_demo_ready.py
+|       |       `-- mt3_real_params_pipeline.yaml
+|       |
+|       |-- Current real-place status
+|       |   |-- Existing reusable pieces
+|       |   |   |-- mt3_place_generalization.py
+|       |   |   |-- mt3_anchor_place_generalization.py
+|       |   |   |-- real_perception_patch/mt3_anchor_perception_real.py
+|       |   |   `-- real_kinesthetic_demo_patch/record_anchor_place_demo_real.py
+|       |   `-- Missing first-class real-place files
+|       |       |-- mt3_sawyer_real_place.py
+|       |       |-- ~/ros_ws/src/sawyer_gazebo/scripts/mt3_sawyer_place_real.py
+|       |       |-- ~/ros_ws/src/sawyer_gazebo/launch/mt3_real_place.launch
+|       |       `-- demo_library/real/recorded/<real_place_demo>.json
+|       |
+|       `-- Documentation / notes
+|           |-- MT3_related_method_survey.md
+|           |-- MT3_related_papers_summary.md
+|           `-- relation_imitation_segment_transfer_name_explanation.md
+|
+|-- learning_thousand_tasks_logs
+|   `-- mt3_real_top_grasp_trials.csv
+|
+|-- vision_models
+|   |-- test_asc60c_langsam.py
+|   `-- lang-segment-anything-main
+|
+|-- ascamera_data
+|   |-- current_rgb.png
+|   |-- current_depth.npy
+|   |-- current_depth.png
+|   |-- current_camera_info.json
+|   |-- current_mask.npy
+|   |-- current_mask.png
+|   |-- current_overlay.png
+|   |-- current_object_points.npy
+|   |-- snapshot_meta.json
+|   |-- save_hp60c_rgb_once.py
+|   |-- mask_to_base_xyz.py
+|   |-- mask_to_base_xyz_top.py
+|   |-- mask_to_base_xyz_top_z44.py
+|   |-- calibrate_sawyer_hp60c_corners_latest_tf.py
+|   |-- click_tip_compare_tf.py
+|   |-- click_tip_compare_tf_v2.py
+|   |-- sawyer_hover_test_safe.py
+|   |-- sawyer_hover_test_safe_v2.py
+|   `-- sawyer_hover_test_safe_v3.py
+|
+|-- tmp_vision
+|   |-- current_rgb.png
+|   |-- current_depth.npy
+|   |-- current_mask.npy
+|   `-- current_anchor_mask.npy
+|
+|-- ros_ws
+|   |-- start_mt3_real.sh
+|   `-- src
+|       |-- sawyer_gazebo
+|       |   |-- config
+|       |   |   `-- mt3_real_params.yaml
+|       |   |-- launch
+|       |   |   `-- mt3_real_grasp.launch
+|       |   `-- scripts
+|       |       |-- mt3_sawyer_grasp.py
+|       |       `-- mt3_sawyer_place.py
+|       |-- sawyer_moveit_config
+|       |   |-- launch
+|       |   |   |-- demo_real.launch
+|       |   |   |-- move_group_real.launch
+|       |   |   |-- planning_context.launch
+|       |   |   `-- trajectory_execution_real.launch.xml
+|       |   `-- config
+|       |       |-- controllers_real.yaml
+|       |       `-- sawyer.srdf
+|       `-- sawyer_description
+|           |-- launch
+|           |   `-- ascamera_eye_to_hand_tf.launch
+|           `-- urdf
+|               |-- sawyer_with_gripper.urdf
+|               |-- sawyer.urdf.xacro
+|               `-- sawyer_base.urdf.xacro
+|
+|-- HP60C
+|   |-- ascam_ws.zip
+|   |-- demo.zip
+|   |-- readme.txt
+|   |-- 环境搭建.pdf
+|   `-- 说明文档.zip
+|
+`-- Sawyer机器人资料
+
+Notes:
+- This tree is a curated engineering map, not a complete filesystem dump.
+- Heavy/generated folders are intentionally omitted: mt3_env, __pycache__, build, devel, logs, catkin cache, model weights, and large image/model artifacts.
+- Current real top grasp is considered first-stage complete and lives in `mt3_sawyer_real_grasp.py`.
+- Current real place is not complete. `mt3_sawyer_place.py` is reusable reference code, but it is still Gazebo/legacy mixed; a real-specific place executor is missing.
+- Real ASC60C/HP60C integration uses RGB/depth/CameraInfo from `/ascamera_hp60c/*`, LangSAM masks from shared Windows paths, and calibrated `base <- ascamera_hp60c_color_0` TF.
+- Formal real top grasp logs are in `D:\ubuntu20\learning_thousand_tasks_logs\mt3_real_top_grasp_trials.csv`.
+- Do not globally change Gazebo/MT3 simulation files while adding real place. Keep real changes in `*_real.py`, `*_real.launch`, or real parameter files.

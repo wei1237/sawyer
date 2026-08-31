@@ -1,0 +1,13 @@
+{
+  "library_version": "1.0",
+  "description": "Handwritten demos removed. The active MT3 demo library should use real recorded demos from demo_library/recorded/.",
+  "demos": [],
+  "default_query": {
+    "language": "pick up the green cube",
+    "top_k": 1
+  },
+  "coordinate_system": {
+    "frame": "base",
+    "description": "Sawyer base frame. X=forward, Y=left, Z=up"
+  }
+}

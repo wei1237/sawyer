@@ -1,0 +1,151 @@
+{
+  "batch_name": "top_grasp_short_cylinder",
+  "shared_trial_root": "/mnt/hgfs2/tmp_vision/mt3_batch",
+  "experiment_group": "top_grasp",
+  "experiment_log_dir": "/mnt/hgfs2/code/learning_thousand_tasks/demo_library/experiment_logs",
+  "default_query": "pick up the green cylinder",
+  "default_model_name": "green_short_cylinder",
+  "default_sdf_path": "/home/wei/ros_ws/src/sawyer_gazebo/worlds/green_short_cylinder.sdf",
+  "default_use_pointcloud_pose": true,
+  "default_use_icp_object_pose": true,
+  "default_use_demo_replay": true,
+  "default_auto_record_success": true,
+  "default_reset_arm": true,
+  "default_timeout_sec": 220,
+  "default_object_size": "[0.040, 0.040, 0.075]",
+  "workbench_top_z": 0.325,
+  "spawn_z_clearance": 0.001,
+  "cleanup_model_names": [
+    "grasp_object",
+    "green_short_cylinder",
+    "green_insert_cylinder",
+    "green_cylinder",
+    "green_rectangular_prism",
+    "green_sphere",
+    "simple_shoe",
+    "blue_insert_socket",
+    "blue_anchor_tray"
+  ],
+  "trials": [
+    {
+      "id": "top_cyl_p1_center_r1",
+      "condition_id": "TOP_P1_x060_y000_cyl",
+      "repeat_id": "1",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p1_center_r2",
+      "condition_id": "TOP_P1_x060_y000_cyl",
+      "repeat_id": "2",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p1_center_r3",
+      "condition_id": "TOP_P1_x060_y000_cyl",
+      "repeat_id": "3",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p2_back_right_r1",
+      "condition_id": "TOP_P2_x050_y-020_cyl",
+      "repeat_id": "1",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.50, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p2_back_right_r2",
+      "condition_id": "TOP_P2_x050_y-020_cyl",
+      "repeat_id": "2",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.50, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p2_back_right_r3",
+      "condition_id": "TOP_P2_x050_y-020_cyl",
+      "repeat_id": "3",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.50, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p3_front_r1",
+      "condition_id": "TOP_P3_x075_y000_cyl",
+      "repeat_id": "1",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.75, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p3_front_r2",
+      "condition_id": "TOP_P3_x075_y000_cyl",
+      "repeat_id": "2",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.75, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p3_front_r3",
+      "condition_id": "TOP_P3_x075_y000_cyl",
+      "repeat_id": "3",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.75, "y": 0.00, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p4_front_left_r1",
+      "condition_id": "TOP_P4_x065_y010_cyl",
+      "repeat_id": "1",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.65, "y": 0.10, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p4_front_left_r2",
+      "condition_id": "TOP_P4_x065_y010_cyl",
+      "repeat_id": "2",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.65, "y": 0.10, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p4_front_left_r3",
+      "condition_id": "TOP_P4_x065_y010_cyl",
+      "repeat_id": "3",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.65, "y": 0.10, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p5_right_r1",
+      "condition_id": "TOP_P5_x060_y-020_cyl",
+      "repeat_id": "1",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p5_right_r2",
+      "condition_id": "TOP_P5_x060_y-020_cyl",
+      "repeat_id": "2",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    },
+    {
+      "id": "top_cyl_p5_right_r3",
+      "condition_id": "TOP_P5_x060_y-020_cyl",
+      "repeat_id": "3",
+      "object_shape": "cylinder",
+      "object_label": "green_cylinder",
+      "pose": {"x": 0.60, "y": -0.20, "z": "auto", "yaw_deg": 0}
+    }
+  ]
+}

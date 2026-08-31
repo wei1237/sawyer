@@ -1,0 +1,8 @@
+# MT3 LLM retrieval config.
+# Copy the export lines into your VM shell, then replace the placeholder key.
+export DEEPSEEK_API_KEY="put-your-deepseek-api-key-here"
+export DEEPSEEK_BASE_URL="https://api.deepseek.com"
+export MT3_LLM_MODEL="deepseek-v4-flash"
+
+# Optional: set to 1 to force offline semantic retrieval.
+export MT3_DISABLE_LLM_API=0

@@ -1,0 +1,71 @@
+# Real Sawyer MT3 parameters for the current HP60C setup.
+# Updated from measured real-table data.
+#
+# IMPORTANT SAFETY DEFAULT:
+#   dry_run: true
+#   allow_real_execution: false
+#
+# The +44 mm value is a real-only base-frame top-surface correction.
+# It does not modify the frozen eye-to-hand calibration matrix.
+
+sawyer_auto_grasp:
+  execution_environment: real
+  workspace:
+  - 0.1
+  - -0.45
+  - -0.62
+  - 1.0
+  - 0.45
+  - 0.6
+  safe_joints:
+    right_j0: 0.0
+    right_j1: -0.8
+    right_j2: 0.0
+    right_j3: 1.8
+    right_j4: 0.0
+    right_j5: 0.0
+    right_j6: 0.0
+  table_surface_z: -0.54
+  object_base_z: -0.54
+  top_grasp_clearance: 0.03
+  pregrasp_clearance: 0.04
+  final_descent_step: 0.003
+  flange_grasp_z_offset: 0.04
+  side_flange_grasp_z_offset: 0.0
+  tcp_x_offset: 0.0
+  tcp_y_offset: 0.0
+  side_tcp_forward_offset: 0.0
+  gripper_name: right_gripper
+  gripper_opening: 0.07
+  gripper_cmd_velocity: 0.03
+  left_finger_tip_frame: right_gripper_l_finger_tip
+  right_finger_tip_frame: right_gripper_r_finger_tip
+  normal_velocity_scale: 0.1
+  normal_acceleration_scale: 0.1
+  descent_velocity_scale: 0.05
+  descent_acceleration_scale: 0.05
+  rgb_topic: /ascamera_hp60c/rgb0/image
+  depth_topic: /ascamera_hp60c/depth0/image_raw
+  camera_info_topic: /ascamera_hp60c/rgb0/camera_info
+  pointcloud_topic: /ascamera_hp60c/depth0/points
+  langsam_mask_path: /mnt/hgfs2/ascamera_data/current_mask.npy
+  target_mask_path: /mnt/hgfs2/ascamera_data/current_mask.npy
+  anchor_mask_path: /mnt/hgfs2/ascamera_data/current_anchor_mask.npy
+  use_registered_depth_mask: true
+  use_pointcloud_pose: false
+  subscribe_pointcloud_diagnostic: false
+  perception_min_points: 20
+  perception_max_points: 12000
+  target_frame: base
+  camera_frame: ascamera_hp60c_color_0
+  strict_camera_frame: true
+  use_tf_camera_extrinsics: true
+  allow_hardcoded_camera_fallback: false
+  object_z_min: -0.6
+  object_z_max: -0.25
+  enable_real_top_z_offset: true
+  real_top_z_offset_m: 0.044
+  dry_run: true
+  allow_real_execution: false
+  use_demo_replay: true
+  prefer_pose_replay: true

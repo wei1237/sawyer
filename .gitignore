@@ -1,0 +1,108 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# ROS
+build/
+devel/
+install/
+log/
+logs/
+
+# Node
+node_modules/
+
+# Temporary
+tmp/
+temp/
+.codex_work/
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Large archives
+*.zip
+*.tar
+*.tar.gz
+
+# ROS bag / datasets
+*.bag
+
+# Video
+*.mp4
+*.avi
+*.mov
+
+# Large model/checkpoint files
+*.pth
+*.pt
+*.ckpt
+*.onnx
+
+# Python virtual environments
+mt3_env/
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# ROS
+build/
+devel/
+install/
+log/
+logs/
+
+# Node
+node_modules/
+
+# Temporary
+tmp/
+temp/
+.codex_work/
+
+# Large archives
+*.zip
+*.tar
+*.tar.gz
+
+# ROS bag
+*.bag
+
+# Videos
+*.mp4
+*.avi
+*.mov
+# Backup / old files
+**/_backups/
+**/backup_*/
+**/old_logs_before_logging_fix/
+
+*.bak
+*.bak_*
+*.backup
+*.backup_*
+*.read_failure_backup_*
+*.schema_backup_*
+
+# Secrets
+.env
+.env.local
+.env.production
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
