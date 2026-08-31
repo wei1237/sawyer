@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <!--
+    Blue shallow tray used as an anchor object for anchored pick-and-place.
+
+    Convention:
+      - model origin is the tray bottom center;
+      - spawn pose z should be the support/table surface height;
+      - the tray center in x/y is the anchor frame origin.
+  -->
+  <model name="blue_anchor_tray">
+    <static>true</static>
+
+    <link name="tray_base">
+      <pose>0 0 0.006 0 0 0</pose>
+      <inertial>
+        <mass>0.20</mass>
+        <inertia>
+          <ixx>0.00055</ixx>
+          <iyy>0.00055</iyy>
+          <izz>0.00105</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.12 0.12 0.012</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.12 0.12 0.012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="rim_front">
+      <pose>0.065 0 0.027 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.010 0.14 0.030</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.010 0.14 0.030</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="rim_back">
+      <pose>-0.065 0 0.027 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.010 0.14 0.030</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.010 0.14 0.030</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="rim_left">
+      <pose>0 0.065 0.027 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.12 0.010 0.030</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.12 0.010 0.030</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <link name="rim_right">
+      <pose>0 -0.065 0.027 0 0 0</pose>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.12 0.010 0.030</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.12 0.010 0.030</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

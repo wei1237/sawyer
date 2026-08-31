@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="green_short_cylinder">
+    <static>false</static>
+    <allow_auto_disable>false</allow_auto_disable>
+    <link name="link">
+      <!-- Small upright cylinder for top-grasp shape generalization:
+           diameter 4.0cm, height 7.5cm.
+           Taller than the cube for visible shape variation, but shorter than
+           the 10cm insertion peg. -->
+      <inertial>
+        <mass>0.10</mass>
+        <inertia>
+          <!-- Solid cylinder inertia for m=0.10, r=0.0200, h=0.075 -->
+          <ixx>0.00005302</ixx>
+          <iyy>0.00005302</iyy>
+          <izz>0.00002000</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.0200</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.5</mu>
+              <mu2>1.5</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>1000000</kp>
+              <kd>1</kd>
+            </ode>
+          </contact>
+          <bounce>
+            <restitution_coefficient>0.03</restitution_coefficient>
+            <threshold>0.01</threshold>
+          </bounce>
+        </surface>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.0200</radius>
+            <length>0.075</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 0.85 0 1</diffuse>
+          <specular>0.05 0.1 0.05 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

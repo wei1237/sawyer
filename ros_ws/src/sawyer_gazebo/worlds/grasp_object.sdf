@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <model name="grasp_object">
+    <static>false</static>
+    <link name="object_link">
+      <gravity>true</gravity>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <!-- 4.5cm正方体+0.1kg: I=m*a²/6=0.1*0.045²/6=3.375e-5 -->
+          <ixx>3.375e-5</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>3.375e-5</iyy>
+          <iyz>0.0</iyz>
+          <izz>3.375e-5</izz>
+        </inertia>
+      </inertial>
+      <collision name="object_coll">
+        <geometry>
+          <box>
+            <size>0.045 0.045 0.045</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0.03</restitution_coefficient>
+            <threshold>0.01</threshold>
+          </bounce>
+        </surface>
+      </collision>
+      <visual name="object_vis">
+        <geometry>
+          <box>
+            <size>0.045 0.045 0.045</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

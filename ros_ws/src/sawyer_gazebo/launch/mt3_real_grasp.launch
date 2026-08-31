@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="params_file" default="$(find sawyer_gazebo)/config/mt3_real_params.yaml" />
+  <arg name="run_execution" default="true" />
+
+  <rosparam file="$(arg params_file)" command="load" />
+  <param name="/use_sim_time" value="false" />
+
+  <node if="$(arg run_execution)"
+        pkg="sawyer_gazebo"
+        type="mt3_sawyer_grasp.py"
+        name="mt3_sawyer_grasp_real"
+        output="screen" />
+</launch>
+

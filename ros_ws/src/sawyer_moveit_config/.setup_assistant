@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: sawyer_description
+    relative_path: urdf/sawyer_with_gripper.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/sawyer.srdf
+  CONFIG:
+    author_name: wei
+    author_email: lsw771125@126.com
+    generated_timestamp: 1768550602

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <!-- 全局仿真时间参数，必须放在最开头，Noetic全节点生效 -->
+  <arg name="use_sim_time" default="true"/>
+  <param name="/use_sim_time" value="$(arg use_sim_time)"/>
+
+  <!-- 基础可配置参数 -->
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="head_display_img" default="$(find sawyer_gazebo)/share/images/sawyer_sdk_research.png"/>
+  <arg name="electric_gripper" default="true"/>
+  <arg name="pedestal" default="true"/>
+  <arg name="static" default="true"/>
+  <arg name="load_gazebo" default="true"/>
+
+  <!-- 【原版核心正确配置】关节名带sawyer::前缀，和URDF完全匹配，初始位姿生效 -->
+  <arg name="initial_joint_states"
+    default=" -J sawyer::right_j0 -0.27
+              -J sawyer::right_j1 1.05
+              -J sawyer::right_j2 0.00
+              -J sawyer::right_j3 0.49
+              -J sawyer::right_j4 -0.08
+              -J sawyer::right_j5 -0.06
+              -J sawyer::right_j6 0.027
+              -J sawyer::head_pan 0.00"/>
+
+  <param name="img_path_head_display" value="$(arg head_display_img)"/>
+
+  <!-- 【Noetic兼容】去掉xacro的-inorder参数，Melodic以上已默认开启 -->
+  <arg name="load_robot_description" default="true"/>
+  <param if="$(arg load_robot_description)" name="robot_description"
+      command="$(find xacro)/xacro $(find sawyer_description)/urdf/sawyer.urdf.xacro
+      gazebo:=true electric_gripper:=$(arg electric_gripper)
+      pedestal:=$(arg pedestal) static:=$(arg static)"/>
+
+  <!-- 原版官方参数加载，完全匹配仿真环境 -->
+  <rosparam command="load" file="$(find sawyer_gazebo)/config/config.yaml" />
+  <rosparam command="load" file="$(find sawyer_description)/params/named_poses.yaml" />
+  <rosparam command="load" file="$(find sawyer_gazebo)/config/acceleration_limits.yaml" />
+
+  <!-- 机械臂运动学参数，和官方配置完全一致 -->
+  <param name="robot/limb/right/root_name" value="base" />
+  <param if="$(arg electric_gripper)" name="robot/limb/right/tip_name"
+         value="right_gripper_tip" />
+  <param unless="$(arg electric_gripper)" name="robot/limb/right/tip_name"
+         value="right_hand" />
+  <param name="robot/limb/right/camera_name" value="right_hand_camera" />
+  <param if="$(arg electric_gripper)"     name="robot/limb/right/gravity_tip_name"
+         value="right_gripper_tip" />
+  <param unless="$(arg electric_gripper)" name="robot/limb/right/gravity_tip_name"
+         value="right_hand" />
+
+  <!-- Gazebo物理引擎优化，保留原版正确配置，提升稳定性 -->
+  <param if="$(arg load_gazebo)" name="gazebo/physics/ode/solver/iters" value="150" />
+  <param if="$(arg load_gazebo)" name="gazebo/physics/ode/constraints/cfm" value="1e-6" />
+  <param if="$(arg load_gazebo)" name="gazebo/physics/ode/constraints/erp" value="0.95" />
+  <param if="$(arg load_gazebo)" name="gazebo/physics/max_step_size" value="0.001" />
+  <param if="$(arg load_gazebo)" name="gazebo/physics/ode/solver/sor" value="1.3" />
+  <param if="$(arg load_gazebo)" name="gazebo/physics/real_time_update_rate" value="1000" />
+
+  <!-- 启动Gazebo空世界，原版标准配置 -->
+  <include if="$(arg load_gazebo)" file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find sawyer_gazebo)/worlds/sawyer.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- 【原版核心正确配置】静态TF与spawn位置完全匹配，无错位 -->
+  <node if="$(arg static)" pkg="tf2_ros" type="static_transform_publisher"
+	name="base_to_world" args="0 0 0 0 0 0 1 world base" />
+
+  <!-- spawn机器人模型，原版标准配置，初始位姿正确生效 -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-param robot_description -urdf -z 0.93 -model sawyer $(arg initial_joint_states)" />
+
+  <!-- 【机械臂不垂的核心！官方适配的控制器启动文件】 -->
+  <!-- 完全匹配gazebo_ros_control插件的命名空间、控制器列表、启动时序，100%加载成功 -->
+  <include file="$(find sawyer_sim_controllers)/launch/sawyer_sim_controllers.launch">
+      <arg name="electric_gripper" value="$(arg electric_gripper)"/>
+      <arg name="gui" value="$(arg gui)" />
+  </include>
+
+  <!-- 相机节点启动，原版标准配置 -->
+  <arg name="wrist_camera" default="right_hand_camera" />
+  <arg name="head_camera"  default="head_camera" />
+  
+  <include file="$(find sawyer_gazebo)/launch/sawyer_sim_cameras.launch">
+      <arg name="wrist_camera" value="$(arg wrist_camera)" />
+      <arg name="head_camera" value="$(arg head_camera)" />
+  </include>
+
+  <!-- 工作台spawn，增加sleep确保机器人加载完成后再启动 -->
+  <node name="spawn_workbench"  
+        pkg="gazebo_ros"         
+        type="spawn_model"       
+        respawn="false" 
+        output="screen"
+        args="-sdf -model static_workbench -x 0.65 -y 0.00 -z 0.30 -file $(find sawyer_gazebo)/worlds/workbench.sdf"
+        launch-prefix="bash -c 'sleep 5; $0 $@'" />
+
+  <!-- 抓取物块spawn，依赖工作台，增加sleep确保时序正确 -->
+  <node name="spawn_grasp_object"  
+        pkg="gazebo_ros"         
+        type="spawn_model"       
+        respawn="false" 
+        output="screen"
+        args="-sdf -model grasp_object -x 0.70 -y -0.08 -z 0.325 -Y 0.261799 -file $(find sawyer_gazebo)/worlds/grasp_object.sdf"
+        launch-prefix="bash -c 'sleep 7; $0 $@'" />
+
+.2617
+</launch>

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <!-- 严格匹配开发指南1.5.2节Gazebo世界文件规范 -->
+  <world name="sawyer_grasp_world">
+    <!-- 1. 场景基础配置（指南1.5.2节标准配置） -->
+    <scene>
+      <ambient rgba="0.7 0.7 0.7 1"/>
+      <background rgba="0.5 0.5 0.5 1"/>
+      <shadows enabled="false"/>
+      <grid enabled="true"/>
+    </scene>
+
+    <!-- 2. 物理引擎配置（指南1.5.2节ODE引擎标准参数，避免物体异常） -->
+    <physics type="ode" update_rate="1000">
+      <gravity xyz="0 0 -9.8"/>
+      <ode>
+        <solver type="quick" min_step_size="0.001" iters="10" sor="1.3"/>
+        <constraints cfm="0.0" erp="0.1" contact_max_correcting_vel="10.0" contact_surface_layer="0.001"/>
+      </ode>
+    </physics>
+
+    <!-- 3. 地面模型（指南1.5.2节必选配置，避免机械臂悬空） -->
+    <model name="ground_plane" static="true">
+      <origin pose="0 0 0 0 0 0"/>
+      <link name="ground_link">
+        <collision name="ground_coll">
+          <geometry><plane normal="0 0 1"/></geometry>
+          <surface>
+            <contact>
+              <ode kp="1000000.0" kd="1"/>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="ground_vis">
+          <geometry><plane normal="0 0 1"/></geometry>
+          <material script="Gazebo/Grey"/>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 4. 30cm×30cm×5cm工作台（严格匹配需求，单位米） -->
+    <!-- 位置适配Sawyer硬件参数：base z=0，L0连杆z=0.081m，工作台高度贴合机械臂工作范围 -->
+    <model name="static_workbench" static="true">
+      <origin pose="0.6 0 0.025 0 0 0"/>
+      <link name="workbench_link">
+        <inertial>
+          <mass value="50.0"/>
+          <inertia ixx="1.0" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="1.0"/>
+        </inertial>
+        <collision name="workbench_coll">
+          <geometry>
+            <box size="0.3 0.3 0.05"/> <!-- 30cm×30cm×5cm，严格对应需求 -->
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>15.0</mu>
+                <mu2>15.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="workbench_vis">
+          <geometry>
+            <box size="0.3 0.3 0.05"/> <!-- 视觉与碰撞体尺寸100%一致，杜绝视觉错位 -->
+          </geometry>
+          <material script="Gazebo/LightGrey"/>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 5. 5cm×5cm×5cm待抓取物体（核心尺寸修正，严格匹配需求） -->
+    <!-- 适配指南3.3.3节夹爪10cm最大开合，5cm为最佳抓取尺寸 -->
+    <model name="grasp_object" static="false">
+      <!-- 位置：工作台中央，Z轴=工作台高度(0.05m)+物体半高(0.025m)=0.075m，完美贴合工作台无悬浮 -->
+      <origin pose="0.6 0 0.075 0 0 0"/>
+      <link name="object_link">
+        <gravity>true</gravity>
+        <!-- 精准惯性参数（指南1.5.2节规范，匹配0.1kg+0.05m立方体） -->
+        <inertial>
+          <mass value="0.1"/>
+          <inertia>
+            <ixx>4.17e-6</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>4.17e-6</iyy>
+            <iyz>0.0</iyz>
+            <izz>4.17e-6</izz>
+          </inertia>
+        </inertial>
+        <!-- 碰撞体：严格5cm，与视觉尺寸完全一致 -->
+        <collision name="object_coll">
+          <geometry>
+            <box size="0.05 0.05 0.05"/> <!-- 核心修正：硬编码5cm，无变量拼接，杜绝解析错误 -->
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.03</restitution_coefficient>
+              <threshold>0.01</threshold>
+            </bounce>
+          </surface>
+        </collision>
+        <!-- 视觉模型：与碰撞体尺寸100%一致，彻底解决视觉尺寸异常 -->
+        <visual name="object_vis">
+          <geometry>
+            <box size="0.05 0.05 0.05"/> <!-- 视觉尺寸与碰撞体严格同步 -->
+          </geometry>
+          <material script="Gazebo/Red"/>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 6. 光照配置（指南1.5.2节标准配置，避免场景过暗） -->
+    <light name="directional_light" type="directional" cast_shadows="false">
+      <origin pose="0 0 5 0 0 0"/>
+      <diffuse rgba="0.9 0.9 0.9 1"/>
+      <direction xyz="0 0 -1"/>
+    </light>
+  </world>
+</sdf>

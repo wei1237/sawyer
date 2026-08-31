@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <!--
+    Small blue placement platform for precision placement experiments.
+
+    The platform is intentionally small (7×7 cm) so that a 4.5 cm cube
+    has only ~1.25 cm clearance per side.  The placement experiment tests
+    whether the perception + alignment + execution chain is accurate
+    enough to place the cube on the platform without it falling off.
+
+    Convention:
+      - model origin is the bottom centre;
+      - spawn pose z should be the table/support surface height;
+      - the platform top surface is at z = 0.02 m.
+  -->
+  <model name="blue_placement_platform">
+    <static>true</static>
+
+    <link name="platform_body">
+      <pose>0 0 0.010 0 0 0</pose>
+      <inertial>
+        <mass>0.10</mass>
+        <inertia>
+          <ixx>0.00012</ixx>
+          <iyy>0.00012</iyy>
+          <izz>0.00020</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.07 0.07 0.02</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.07 0.07 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.12 0.85 1</ambient>
+          <diffuse>0.02 0.18 0.95 1</diffuse>
+          <specular>0.15 0.15 0.25 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

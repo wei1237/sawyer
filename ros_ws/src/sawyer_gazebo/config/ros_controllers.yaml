@@ -1,0 +1,32 @@
+# 修正后：无外层robot命名空间，控制器名称与系统一致
+right_joint_position_controller:
+  type: position_controllers/JointPositionController
+  joints:
+    - right_j0
+    - right_j1
+    - right_j2
+    - right_j3
+    - right_j4
+    - right_j5
+    - right_j6
+  action_server: true
+  action_ns: follow_joint_trajectory
+  gains:
+    right_j0: {p: 500.0, i: 10.0, d: 25.0}
+    right_j1: {p: 400.0, i: 10.0, d: 30.0}
+    right_j2: {p: 250.0, i: 10.0, d: 30.0}
+    right_j3: {p: 300.0, i: 10.0, d: 50.0}
+    right_j4: {p: 300.0, i: 10.0, d: 8.0}
+    right_j5: {p: 100.0, i: 1.0, d: 5.0}
+    right_j6: {p: 50.0, i: 10.0, d: 4.0}
+
+electric_gripper_controller:
+  type: position_controllers/JointPositionController
+  joints:
+    - right_gripper_l_finger_joint
+    - right_gripper_r_finger_joint
+  action_server: true
+  action_ns: follow_joint_trajectory
+  gains:
+    right_gripper_l_finger_joint: {p: 5000.0, i: 50.0, d: 0.5}
+    right_gripper_r_finger_joint: {p: 5000.0, i: 50.0, d: 0.5}

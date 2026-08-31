@@ -1,0 +1,38 @@
+robot name is: sawyer
+---------- Successfully Parsed XML ---------------
+root Link: world has 1 child(ren)
+    child(1):  base
+        child(1):  controller_box
+        child(2):  pedestal_feet
+        child(3):  pedestal
+        child(4):  right_arm_base_link
+            child(1):  right_l0
+                child(1):  head
+                    child(1):  screen
+                    child(2):  head_camera
+                        child(1):  head_camera_optical
+                child(2):  right_l1
+                    child(1):  right_l1_2
+                    child(2):  right_l2
+                        child(1):  right_l2_2
+                        child(2):  right_l3
+                            child(1):  right_l4
+                                child(1):  right_arm_itb
+                                child(2):  right_l4_2
+                                child(3):  right_l5
+                                    child(1):  right_hand_camera
+                                        child(1):  right_hand_camera_optical
+                                    child(2):  right_l6
+                                        child(1):  right_hand
+                                            child(1):  right_gripper_base
+                                                child(1):  right_connector_plate_base
+                                                    child(1):  right_connector_plate_mount
+                                                        child(1):  right_electric_gripper_base
+                                                            child(1):  right_gripper_l_finger
+                                                                child(1):  right_gripper_l_finger_tip
+                                                            child(2):  right_gripper_r_finger
+                                                                child(1):  right_gripper_r_finger_tip
+                                                child(2):  right_gripper_tip
+                                    child(3):  right_wrist
+                child(3):  right_torso_itb
+        child(5):  torso

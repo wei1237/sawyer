@@ -1,0 +1,37 @@
+<launch>
+  <!-- ==============================================
+       严格遵循《Sawyer开发指南》3.3.8节 MoveIt测试规范
+       适配Gazebo仿真环境与intera_sdk官方Action服务
+       ============================================== -->
+
+  <!-- 核心参数定义，兼容fake虚拟演示模式与真实控制器模式 -->
+  <arg name="moveit_controller_manager" default="moveit_simple_controller_manager" />
+  <arg name="fake_execution_type" default="interpolate" />
+  <arg name="moveit_manage_controllers" default="true"/>
+
+  <!-- 轨迹执行全局参数，完全匹配Sawyer机械臂运动特性与开发指南规范 -->
+  <param name="moveit_manage_controllers" value="$(arg moveit_manage_controllers)"/>
+  <param name="trajectory_execution/allowed_execution_duration_scaling" value="1.2"/>
+  <param name="trajectory_execution/allowed_goal_duration_margin" value="0.5"/>
+  <param name="trajectory_execution/allowed_start_tolerance" value="0.01"/>
+
+  <!-- ==============================================
+       模式分支：从根源解决文件缺失报错
+       1. fake模式：纯虚拟演示，无硬件/仿真
+       2. 真实模式：适配Gazebo仿真/真实硬件，直接加载配置
+       ============================================== -->
+  <!-- Fake虚拟执行模式（纯演示用） -->
+  <group if="$(eval arg('moveit_controller_manager') == 'fake')">
+    <param name="moveit_controller_manager" value="moveit_fake_controller_manager/MoveItFakeControllerManager"/>
+    <param name="fake_execution/type" value="$(arg fake_execution_type)"/>
+  </group>
+
+  <!-- 真实控制器模式（Gazebo仿真/真实硬件，适配Sawyer官方Action服务） -->
+  <group unless="$(eval arg('moveit_controller_manager') == 'fake')">
+    <!-- 直接指定控制器管理器，无需调用额外launch文件，彻底解决文件缺失 -->
+    <param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+    <!-- 加载与Sawyer仿真环境100%匹配的控制器配置 -->
+    <rosparam file="$(find sawyer_moveit_config)/config/controllers.yaml" command="load"/>
+  </group>
+
+</launch>

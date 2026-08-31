@@ -1,0 +1,20 @@
+controller_list:
+  # Real Sawyer arm trajectory action provided by:
+  #   rosrun intera_interface joint_trajectory_action_server.py -m position
+  - name: /robot/limb/right
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - right_j0
+      - right_j1
+      - right_j2
+      - right_j3
+      - right_j4
+      - right_j5
+      - right_j6
+
+  # The real electric gripper is controlled directly through
+  # intera_interface.Gripper('right_gripper') in the execution script.
+  # Do not add the Gazebo /robot/electric_gripper gripper_action controller here.
+

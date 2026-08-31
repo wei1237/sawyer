@@ -1,0 +1,13 @@
+<launch>
+  <arg name="moveit_controller_manager" default="moveit_simple_controller_manager/MoveItSimpleControllerManager" />
+  <arg name="moveit_manage_controllers" default="false" />
+  <arg name="controllers_file" default="$(find sawyer_moveit_config)/config/controllers_real.yaml" />
+
+  <param name="moveit_manage_controllers" value="$(arg moveit_manage_controllers)" />
+  <param name="trajectory_execution/allowed_execution_duration_scaling" value="1.5" />
+  <param name="trajectory_execution/allowed_goal_duration_margin" value="1.0" />
+  <param name="trajectory_execution/allowed_start_tolerance" value="0.02" />
+  <param name="moveit_controller_manager" value="$(arg moveit_controller_manager)" />
+  <rosparam file="$(arg controllers_file)" command="load" />
+</launch>
+

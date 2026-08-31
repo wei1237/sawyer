@@ -1,0 +1,23 @@
+right_joint_position_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - right_j0
+    - right_j1
+    - right_j2
+    - right_j3
+    - right_j4
+    - right_j5
+    - right_j6
+  constraints:
+    goal_time: 0.6
+    stopped_velocity_tolerance: 0.05
+  state_publish_rate: 50
+  action_monitor_rate: 10
+  gains:  # 控制器增益，确保轨迹平滑
+    right_j0: {p: 500, d: 25, i: 10, i_clamp: 5}
+    right_j1: {p: 400, d: 30, i: 10, i_clamp: 5}
+    right_j2: {p: 250, d: 30, i: 10, i_clamp: 5}
+    right_j3: {p: 300, d: 50, i: 10, i_clamp: 5}
+    right_j4: {p: 300, d: 8, i: 10, i_clamp: 5}
+    right_j5: {p: 100, d: 5, i: 1, i_clamp: 1}
+    right_j6: {p: 50, d: 4, i: 10, i_clamp: 5}

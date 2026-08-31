@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <model name="static_workbench">
+    <static>true</static>
+    <link name="workbench_link">
+      <inertial>
+        <!-- SDF规范：mass是子标签，不是属性 -->
+        <mass>50.0</mass>
+        <inertia>
+          <!-- SDF规范：ixx/ixy等是子标签，不是属性 -->
+          <ixx>1.0</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0.0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+      <collision name="workbench_coll">
+        <geometry>
+          <box>
+            <size>0.5 0.70 0.05</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="workbench_vis">
+        <geometry>
+          <box>
+            <size>0.5 0.70 0.05</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/LightGrey</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

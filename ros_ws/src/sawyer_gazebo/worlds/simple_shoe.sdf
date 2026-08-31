@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="simple_shoe">
+    <pose>0 0 0 0 0 0</pose>
+    <link name="shoe_body">
+      <inertial>
+        <mass>0.1</mass>
+        <inertia><ixx>0.001</ixx><iyy>0.001</iyy><izz>0.001</izz></inertia>
+      </inertial>
+      <!-- 鞋底 -->
+      <visual name="sole">
+        <geometry><box><size>0.22 0.09 0.04</size></box></geometry>
+        <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+      </visual>
+      <collision name="sole_col"><geometry><box><size>0.22 0.09 0.04</size></box></geometry></collision>
+      <!-- 鞋头 -->
+      <visual name="toe">
+        <pose>0.08 0 0.04 0 0 0</pose>
+        <geometry><box><size>0.06 0.09 0.06</size></box></geometry>
+        <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+      </visual>
+      <collision name="toe_col"><pose>0.08 0 0.04 0 0 0</pose><geometry><box><size>0.06 0.09 0.06</size></box></geometry></collision>
+      <!-- 鞋跟 -->
+      <visual name="heel">
+        <pose>-0.07 0 0.04 0 0 0</pose>
+        <geometry><box><size>0.05 0.08 0.07</size></box></geometry>
+        <material><diffuse>0.9 0.1 0.1 1</diffuse></material>
+      </visual>
+      <collision name="heel_col"><pose>-0.07 0 0.04 0 0 0</pose><geometry><box><size>0.05 0.08 0.07</size></box></geometry></collision>
+    </link>
+  </model>
+</sdf>

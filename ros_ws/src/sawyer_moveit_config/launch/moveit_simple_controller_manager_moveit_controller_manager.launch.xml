@@ -1,0 +1,8 @@
+<launch>
+  <!-- 加载moveit_simple_controller_manager，对应《Sawyer开发指南》3.3.8节控制器配置要求 -->
+  <arg name="moveit_controller_manager" default="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+  <param name="moveit_controller_manager" value="$(arg moveit_controller_manager)"/>
+
+  <!-- 加载与SDK Action服务100%匹配的控制器配置 -->
+  <rosparam file="$(find sawyer_moveit_config)/config/controllers.yaml"/>
+</launch>
